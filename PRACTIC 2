@@ -1,0 +1,54 @@
+PRACTIS 2
+
+FACTORIAL
+
+
+
+(defun factorial (x) (if (= x 0) 
+(* x (factorial (- x )))))
+(print (fav=ctorial ))
+
+
+
+FIBONACHI
+
+(defun fib (x) (if (or (= x 0) (= x 1)) 1 
+                (+ (fib(- x 1)) (fib(- x 2)))))
+    (print(fib 3))
+(print(fib 5))(print(fib 7))
+
+
+
+(defun fs(x) (if (< x 0) 0
+                (+ (fs(- x 1)) (sqrt x))))    
+(print(fs 4))(print(fs 5))
+(print(fs 7))
+
+
+(defun fs(x y) (if (<= y 0) 0
+                (+ (fs x (- y 1) ) (log y x))))    
+(print(fs 4 3))(print(fs 5 9))
+(print(fs 7 3))
+
+
+(defun foo(x) (if (<= x 0) 1
+          (if(oddp x) (* x (foo (- x 2 )))
+(* (- x 1) (foo(- x 3))))))
+
+(print(foo 6))
+
+
+(defun foo(x y) (if (= y 0) x                    (foo y (mod x y))))
+        
+    (print(foo 27 9))
+
+
+
+
+
+(defun foo(x) (if (= x 0) x                              (+ (foo (truncate x 10 )) (mod x 10))))
+        
+    (print(foo 276))
+
+
+
