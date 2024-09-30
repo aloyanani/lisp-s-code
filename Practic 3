@@ -1,0 +1,31 @@
+(defun len(L) (if (null L) 0 
+              (+ 1 (len(cdr L)))))
+(print (len '(a s d 1 2 3)))
+
+
+
+
+(defun f3even(L) (if (null L) 0                  
+                  (if (and (= 0 (rem (car L) 3 ))
+                        (evenp(car L)))                    
+                  (1+ (f3even (cdr L)))
+                  (f3even(cdr L)))))
+(print (f3even '(6 5 12 1 2 3)))
+
+
+
+
+(defun sum1(X y z) (if (null X) 0 
+                   (if (and (= 0 (rem (car X) z ))
+                           (< y (car X)))                      
+                   (+ (car X) (sum1 (cdr X) y z))
+                   (sum1(cdr X) y z ))))
+(print (sum1 '(6 5 12 1 2 3) 2 3))
+
+
+
+(defun evenEl(X) (if (null X) nil 
+                     (if (= 1 (rem (car X) 2 ))
+                     (cons (car X) (evenEl(cdr X)))
+                     (evenEl(cdr X)))))
+(print (evenEl'(6 5 12 1 2 3)))
