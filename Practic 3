@@ -65,5 +65,17 @@
                 (F( G (cdr X) )(car X))))
 
 (print (G'(6 5 12 1 2 3) ))
+
+
+
+;gnu clisp  2.49.60
+(defun F(X y) (if (null X) (cons y nil)
+                     (cons (car X) (F (cdr X ) y) )))
+
+(defun G(a) (if (<= a 1) (cons a nil)
+                (F(G (truncate a 2)) (rem a 2))))
+
+(print (G 5 ))
+                    
                     
                     
