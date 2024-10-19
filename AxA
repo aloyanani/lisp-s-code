@@ -1,0 +1,10 @@
+(defun el_pairs(el L)(if(null L) nil
+                        (cons(cons el(cons (car L) nil))
+                             (el_pairs el (cdr L)))))
+
+
+(defun Dec_Prod(X Y)(if(null X) nil
+                       (append (el_pairs (car X) Y) (Dec_Prod(cdr X) Y))))
+
+
+(print(Dec_Prod '(a s d) '(e r)))
