@@ -1,0 +1,11 @@
+;gnu clisp  2.49.60
+(defun is_in(L e)(if(null L) nil
+                    (or(equalp e (car L)) 
+                       (is_in (cdr L) e))))
+
+(defun ListToSet(X)(if(null X) nil
+                      (if (is_in (cdr X) (car X))
+                          (ListToSet(cdr X))
+                       (cons (car X) (ListToSet (cdr X ))))))
+
+(print (ListToSet '(a s d f a f j i k l)))
