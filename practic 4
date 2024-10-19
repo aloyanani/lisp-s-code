@@ -9,3 +9,43 @@
                        (cons (car X) (ListToSet (cdr X ))))))
 
 (print (ListToSet '(a s d f a f j i k l)))
+
+
+
+
+
+;gnu clisp  2.49.60
+(defun is_in(L e)(if(null L) nil
+                    (or(equalp e (car L)) 
+                       (is_in (cdr L) e))))
+
+(defun ListToSet(X)(if(null X) nil
+                      (if (is_in (cdr X) (car X))
+                          (ListToSet(cdr X))
+                       (cons (car X) (ListToSet (cdr X ))))))
+
+
+(defun LUnion(L K)(if(null K) L
+                     (if(is_in L (car K))
+                        (LUnion L (cdr K))
+                        (cons  (car K) (LUnion L (cdr K))))))
+
+
+(defun LIntersection(L K)(if(null K) nil
+                     (if(is_in L (car K))
+                        (cons  (car K) (LIntersection L (cdr K)))
+                        (LIntersection L (cdr K)))))
+
+                            
+    
+(defun Difference(L K)(if(null L) nil
+                     (if(is_in K (car L))
+                        (Difference  (cdr L) K)
+                        (cons(car L)  (Difference  (cdr L) K)))))
+                        
+                         
+                         
+
+
+
+(print (Difference'(a s d) '(s e f)))
