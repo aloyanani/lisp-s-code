@@ -1,0 +1,27 @@
+;gnu clisp  2.49.60
+
+;F = R1(5, S_1_2(s, S_1_2(s,I_21)))
+
+
+(defun s(x) (1+ x))
+(defun I_2_1(x y) x)
+(defun S_1_2(g h) #'(lambda(x y)(funcall g(funcall h x y))))
+
+; h= S_1_2(s, S_1_2(s, I_1_2))
+(defun H() (S_1_2 's (S_1_2 's 'I_2_1)))
+
+
+;R1(c,h) = lambda ch [if(x=0, c,h(x-1, R1(c ,h)(x-1)))]
+
+(defun R1(c h) #'(lambda(x)
+                        (if (= x 0)  c
+                            (funcall h (1- x)
+                                     (funcall(R1 c h)(1- x))))))
+
+;F= R1(5, S_1_2(s, S_1_2(s, I_2_1)))
+(defun F() (R1 5(S_1_2 's(S_1_2 's 'I_2_1))))
+(print (funcall(H) 5 9))
+
+(print (funcall(F) 0))
+(print (funcall(F) 5))
+(print (funcall(F) 8))
