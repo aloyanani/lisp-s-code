@@ -1,0 +1,75 @@
+;Cond1  = lambda x[if (p(x),g(x),h(x))]]
+;Cond1(p g h)  = lambda p g h[lambda x[if (p(x),g(x),h(x))]]
+(defun Cond1 (p g h) #'(lambda (x)
+                                  (if (funcall p x)
+                                      (funcall g x)
+                                      (funcall h x))))
+
+;comp = lambda g h[lambda x[if g(h(x))]]
+;comp(g h) = lambda x[if g(h(x))]]
+(defun Comp(g h) #'(lambda (x)  (funcall g (funcall h x))))
+
+
+
+
+;const = lambda c[lambda x [c]]
+;const(x) = lambda x [c]]
+(defun Const(c) #'(lambda (x) c))
+
+
+;null
+;Contr = lambda g h[lambda x[ g(x)(h(x))]] = lambda g h[lambda x[cons( g(x), cons (h(x), nil))]];
+;Contr(g h)= [lambda x[cons( g(x), cons (h(x), nil))]];
+
+(defun Constr(g h) #'(lambda (x) (Cons (funcall g x)
+                                      (cons (funcall h x) nil))))
+
+;tl
+(defun tl(x) (cdr x))
+;s1
+(defun S1(x) (car x))
+; S2
+    (defun S2(x) (cadr x))
+    
+  ;apndl
+    (defun apndl(x) (cons(car x) (cadr x)))
+    
+
+;F = Cond(comp( null, comp(S1, S1)), S2, 
+ ;       comp(apndl, 
+  ; contr(comp|(S1, S1),
+  ;comp(F, const(comp(S1, tl) , S2))))
+    
+    
+    (defun F(x) (funcall(Cond1 ( Comp 'null (comp 'S1 'S1))
+                                        'S2
+                                        (Comp 'apndl
+                                              (Constr (Comp 'S1 'S1)
+                                                      (Comp 'F 
+                                                        (Constr (comp 'S1 'tl)
+                                                                'S2)))))x))
+    
+    
+        
+
+
+
+(print  (F '('(a s) (a k l) )))
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
