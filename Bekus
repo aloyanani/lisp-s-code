@@ -1,0 +1,59 @@
+;Cond1  = lambda x[if (p(x),g(x),h(x))]]
+;Cond1(p g h)  = lambda p g h[lambda x[if (p(x),g(x),h(x))]]
+(defun Cond1 (p g h) #'(lambda (x)
+                                  (if (funcall p x)
+                                      (funcall g x)
+                                      (funcall h x))))
+
+;comp = lambda g h[lambda x[if g(h(x))]]
+;comp(g h) = lambda x[if g(h(x))]]
+(defun Comp(g h) #'(lambda (x)  (funcall g (funcall h x))))
+
+
+
+
+;const = lambda c[lambda x [c]]
+;const(x) = lambda x [c]]
+(defun Const(c) #'(lambda (x) c))
+
+
+;null
+;atom
+;tl
+(defun tl(x) (cdr x))
+;s1
+(defun S1(x) (car x))
+
+;F = cond(null, const(nil),
+;       cond(atom, const(nil), 
+;       cond(comp(null, tl), S1, comp(F,tl))))
+
+
+(defun F(x) (funcall (Cond1 'null (Const nil)
+                   (Cond1 'atom (Const nil)
+                          (Cond1 (Comp 'null 'tl)
+                                 'S1
+                                 (Comp 'F 'tl)))) x))
+
+
+
+
+(print  (F '(a k l) ))
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
