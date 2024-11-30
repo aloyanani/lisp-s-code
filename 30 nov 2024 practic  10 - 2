@@ -23,3 +23,12 @@
 
 
 (print (funcall (Fun '1+) 4))
+
+
+
+
+(defun G (n h) #'(lambda (L) (if (null L) nil
+                                  (cons (+ n (funcall h (car L)))
+                                        (funcall (G n h)(cdr L))))))
+
+(print (funcall (G 3 (lambda (x)(* x 2))) '( 1 2 3 4)))
