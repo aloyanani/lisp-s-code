@@ -11,3 +11,15 @@
 (print (funcall (Fun '1+ '1-) '(1 1 1 1 1)))
 
 (print (funcall (Fun1 '1+ '1-) '(2 2 2 2 2)))
+
+
+
+
+
+
+
+(defun Fun (g) #'(lambda (x) (if (= x 0) (funcall g 0)
+                                     (funcall g (funcall (Fun g )(1- x))))))
+
+
+(print (funcall (Fun '1+) 4))
