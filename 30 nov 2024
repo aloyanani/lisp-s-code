@@ -1,8 +1,13 @@
-
-(defun Fune (g h) #'(lambda (X) (if (null X) nil 
+(defun Fun (g h) #'(lambda (X) (if (null X) nil 
                                      (if (null (cdr X)) 
                                      (cons (funcall g (car X)) nil)
-                                         (cons (funcall g (car X)) (cons (funcall h (cadr X)) (funcall (Fune g h)(cddr X))))))))
+                                         (cons (funcall g (car X)) (cons (funcall h (cadr X)) (funcall (Fun g h)(cddr X))))))))
 
 
-(print (funcall (Fune '1+ '1-) '(1 1 1 1 1)))
+(defun Fun1 (g h) #'(lambda (X) (if (null X) nil 
+                                    (cons (funcall g (car X))  (funcall (Fun1 h g )(cdr X))))))
+
+                                          
+(print (funcall (Fun '1+ '1-) '(1 1 1 1 1)))
+
+(print (funcall (Fun1 '1+ '1-) '(2 2 2 2 2)))
