@@ -1,0 +1,8 @@
+
+(defun Fune (g h) #'(lambda (X) (if (null X) nil 
+                                     (if (null (cdr X)) 
+                                     (cons (funcall g (car X)) nil)
+                                         (cons (funcall g (car X)) (cons (funcall h (cadr X)) (funcall (Fune g h)(cddr X))))))))
+
+
+(print (funcall (Fune '1+ '1-) '(1 1 1 1 1)))
